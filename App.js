@@ -1,5 +1,6 @@
 import React from 'react';
-import Login from './src/Content/Login';
+import AppNavigator from 'react-navigation';
+import Menu from './src/Content/Menu';
 
 //All source code copyrighted by Dedy Darmawan
 export default class App extends React.Component {
@@ -7,7 +8,7 @@ export default class App extends React.Component {
   render() {
       return (
 
-        <Login />
+        <Menu />
       );
     }
   }

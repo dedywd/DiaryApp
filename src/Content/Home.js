@@ -12,21 +12,27 @@ export default class Home extends React.Component {
         </View>
         <View style={styles.vMenu}>
           <TouchableHighlight
-            //onPress={}
+            onPress={() => this.props.navigation.navigate('Layar3')}
             accessibilityLabel="Tulis"
             style={styles.vItemMenu}>
             <Text style={styles.textMenu}>TULIS BUKU HARIAN</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            //onPress={}
+            onPress={() => this.props.navigation.navigate('Layar5')}
             accessibilityLabel="Lihat"
             style={styles.vItemMenu}>
             <Text style={styles.textMenu}>LIHAT BUKU HARIAN</Text>
           </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => this.props.navigation.navigate('Layar4')}
+            accessibilityLabel="Lihat"
+            style={styles.vItemMenu}>
+            <Text style={styles.textMenu}>UPLOAD FOTO</Text>
+          </TouchableHighlight>
         </View>
         <View style={styles.vLogout}>
         <TouchableHighlight
-          //onPress={}
+          onPress={() => this.props.navigation.navigate('Main')}
           accessibilityLabel="LogOut"
           style={styles.vItemMenu}>
           <Text style={styles.textMenu}>LOG OUT</Text>

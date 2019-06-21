@@ -9,6 +9,7 @@ export default class Register extends React.Component {
         <View style={styles.vHeader}>
          <Text style={styles.txtHeader}>CREATE YOUR ACCOUNT</Text>
         </View>
+
         <View style={styles.vForm}>
           <View style={styles.vFormChild}>
             <Text style={styles.txtForm}>Nama</Text>
@@ -26,9 +27,10 @@ export default class Register extends React.Component {
             />
           </View>
         </View>
+
         <View style={styles.vButton}>
           <TouchableHighlight
-              //onPress={}
+              onPress={() => this.props.navigation.navigate('Main')}
               accessibilityLabel="Cancel"
               style={styles.vItemMenu}>
               <Text style={styles.textForm}>CANCEL</Text>

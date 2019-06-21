@@ -41,7 +41,7 @@ export default class WriteDiary extends React.Component {
         <View style={styles.containerNavigation}>
         <View style={styles.vNavigation}>
           <TouchableHighlight
-            //onPress={}
+            onPress={() => this.props.navigation.navigate('Layar1')}
             accessibilityLabel="BACK"
             style={styles.vItemNav}>
             <Text style={styles.textNavigation}>BACK</Text>
@@ -105,11 +105,11 @@ vMain:{
  },
 
 vText:{
-  flex: 3
+  flex: 2
 },
 
  txtText:{
-   height:300,
+   height:200,
    backgroundColor:'#fff',
    borderColor: 'gray',
    borderWidth: 1,
