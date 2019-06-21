@@ -4,10 +4,13 @@ import { StyleSheet, Text,TextInput, View, Button, TouchableHighlight} from 'rea
 
 export default class Home extends React.Component {
   render() {
+    const { navigation } = this.props;
+    const username = navigation.getParam('username');
+
     return (
       <View style={styles.vMain}>
         <View style={styles.vHeader}>
-         <Text style={styles.txtHeader}>Hai user, bagaimana kesanmu hari ini?
+         <Text style={styles.txtHeader}>Hai {JSON.stringify(username)}, bagaimana kesanmu hari ini?
          Ayo tuliskan beberapa catatan di buku harianmu.</Text>
         </View>
         <View style={styles.vMenu}>

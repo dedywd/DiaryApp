@@ -4,7 +4,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import Screen1 from './Home.js';
 import Screen2 from './Register.js';
 import Screen3 from './WriteDiary.js';
-import Screen4 from './uploadImg.js';
+import Screen4 from './Upload.js';
 import Screen5 from './LihatDiary.js';
 import MainScreen from './Login.js';
 const AppNavigator = createStackNavigator(

@@ -1,8 +1,56 @@
 import React from 'react';
-import { StyleSheet, Text,TextInput, View, Button, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text,TextInput, View, Button, TouchableHighlight,ActivityIndicator} from 'react-native';
 
 
 export default class Register extends React.Component {
+  constructor()
+    {
+        super();
+
+        this.state = {
+          nama:'',
+          username:'',
+          password:'',
+        }
+    }
+
+    Insert_Data_Into_MySQL = () =>
+ {
+     this.setState({ ActivityIndicator_Loading : true }, () =>
+     {
+         fetch('http://dailydiarymobile.000webhostapp.com/tambahUser.php',
+         {
+             method: 'POST',
+             headers:
+             {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(
+             {
+               nama : this.state.nama,
+
+               username : this.state.username,
+
+               password : this.state.password
+
+             })
+
+         }).then((response) => response.json()).then((responseJsonFromServer) =>
+         {
+             alert(responseJsonFromServer);
+
+             this.setState({ ActivityIndicator_Loading : false });
+
+         }).catch((error) =>
+         {
+             console.error(error);
+
+             this.setState({ ActivityIndicator_Loading : false});
+         });
+     });
+ }
+
   render() {
     return (
       <View style={styles.vMain}>
@@ -14,16 +62,19 @@ export default class Register extends React.Component {
           <View style={styles.vFormChild}>
             <Text style={styles.txtForm}>Nama</Text>
             <TextInput style={styles.txtInput} keyboardType = 'default'
+            onChangeText={(txtnama) => this.setState({nama:txtnama})}
             />
           </View>
           <View style={styles.vFormChild}>
             <Text style={styles.txtForm}>Username</Text>
             <TextInput style={styles.txtInput} keyboardType = 'default'
+            onChangeText={(txtuser) => this.setState({username:txtuser})}
             />
           </View>
           <View style={styles.vFormChild}>
             <Text style={styles.txtForm}>Password</Text>
             <TextInput style={styles.txtInput} keyboardType = 'default'
+            onChangeText={(txtpassword) => this.setState({password:txtpassword})}
             />
           </View>
         </View>
@@ -36,7 +87,7 @@ export default class Register extends React.Component {
               <Text style={styles.textForm}>CANCEL</Text>
           </TouchableHighlight>
           <TouchableHighlight
-              //onPress={}
+              onPress={this.Insert_Data_Into_MySQL}
               accessibilityLabel="Register"
               style={styles.vItemMenu}>
               <Text style={styles.textForm}>REGISTER</Text>

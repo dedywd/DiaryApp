@@ -1,8 +1,56 @@
 import React from 'react';
-import { StyleSheet, Text,TextInput, View, Button, TouchableHighlight} from 'react-native';
+import { StyleSheet, Text,TextInput, View, Button, TouchableHighlight,ActivityIndicator} from 'react-native';
 
 
 export default class WriteDiary extends React.Component {
+
+  constructor()
+    {
+        super();
+        this.state = {
+          tanggal:'',
+          judul:'',
+          isi:'',
+        }
+    }
+
+    Insert_Data_Into_MySQL = () =>
+ {
+     this.setState({ ActivityIndicator_Loading : true }, () =>
+     {
+         fetch('http://dailydiarymobile.000webhostapp.com/tambahDiary.php',
+         {
+             method: 'POST',
+             headers:
+             {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify(
+             {
+               tanggal : this.state.tanggal,
+
+               judul : this.state.judul,
+
+               isi : this.state.isi
+
+             })
+
+         }).then((response) => response.json()).then((responseJsonFromServer) =>
+         {
+             alert(responseJsonFromServer);
+
+             this.setState({ ActivityIndicator_Loading : false });
+
+         }).catch((error) =>
+         {
+             console.error(error);
+
+             this.setState({ ActivityIndicator_Loading : false});
+         });
+     });
+ }
+
   render() {
     return (
       <View style={styles.vMain}>
@@ -13,31 +61,25 @@ export default class WriteDiary extends React.Component {
           <View style={styles.vFormChild}>
             <Text style={styles.txtForm}>Tanggal</Text>
             <TextInput style={styles.txtInput} keyboardType = 'default'
+            onChangeText={(txttanggal) => this.setState({tanggal:txttanggal})}
             />
           </View>
           <View style={styles.vFormChild}>
             <Text style={styles.txtForm}>Judul</Text>
             <TextInput style={styles.txtInput} keyboardType = 'default'
+            onChangeText={(txtjudul) => this.setState({judul:txtjudul})}
             />
           </View>
         </View>
         <View style={styles.vText}>
           <TextInput style={styles.txtText}
           keyboardType = 'default'
+          onChangeText={(txtisi) => this.setState({isi:txtisi})}
           placeholder="Tulis catatan harian di sini"
           multiline = {true}
           />
         </View>
-        <View style={styles.vButton}>
-          <View style={styles.vItemButton}>
-          <TouchableHighlight
-              //onPress={}
-              accessibilityLabel="Add Photo"
-              style={styles.vItemMenu}>
-              <Text style={styles.textForm}>ADD PHOTO</Text>
-          </TouchableHighlight>
-          </View>
-        </View>
+
         <View style={styles.containerNavigation}>
         <View style={styles.vNavigation}>
           <TouchableHighlight
@@ -47,7 +89,7 @@ export default class WriteDiary extends React.Component {
             <Text style={styles.textNavigation}>BACK</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            //onPress={}
+            onPress={this.Insert_Data_Into_MySQL}
             accessibilityLabel="SAVE"
             style={styles.vItemNav}>
             <Text style={styles.textNavigation}>SAVE</Text>

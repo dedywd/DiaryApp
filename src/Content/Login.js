@@ -4,44 +4,12 @@ import axios from 'axios';
 
 
 export default class Login extends React.Component {
-
-  constructor() {
-          super();
-          this.state = {
-              username:'',
-              password: '',
-              succes: false,
-              id: 0,
-              pesan:''
-          };
+  constructor(props){
+      super(props);
+      this.state={
+        username:''
       }
-
-      auth = ()=>{
-          console.log(this.state.username);
-          console.log(this.state.password);
-          axios.post(`http://dailydiarymobile.000webhostapp.com/login.php`,{
-              username: this.state.username,
-              password: this.state.password
-          })
-              .then(res => {
-                  const categories = res.data;
-                  console.log(categories);
-                  this.setState({succes:categories.succes , id: categories.id})
-              })
-              .catch(function (error) {
-                  console.log(error);
-              });
-
-          if(this.state.succes==true){
-            this.props.navigation.navigate('Layar1', {
-              id: this.state.id,
-          });
-          }else
-          {
-              this.setState({pesan:'Username atau Kata Sandi Salah'})
-          }
-
-      }
+    }
 
   render() {
     return (
@@ -56,7 +24,7 @@ export default class Login extends React.Component {
             <Text style={styles.txtForm}>Username</Text>
             <TextInput style={styles.txtInput} keyboardType = 'default'
             placeholder = 'Username'
-            onChangeText={(username) => this.setState({username})}
+            onChangeText={(txtusername) => this.setState({username:txtusername})}
             value={this.state.username}
             />
           </View>
@@ -72,7 +40,7 @@ export default class Login extends React.Component {
 
         <View style={styles.vButton}>
           <TouchableHighlight
-              onPress={() => this.props.navigation.navigate('Layar1')}
+              onPress={() => this.props.navigation.navigate('Layar1',{ username: this.state.username })}
               accessibilityLabel="Login"
               style={styles.vItemMenu}>
               <Text style={styles.textForm}>LOGIN</Text>
